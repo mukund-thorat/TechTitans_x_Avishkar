@@ -3,9 +3,18 @@ import hashlib
 import os
 import hmac
 
-from passlib.context import CryptContext
+import bcrypt
 
-bcrypt_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+def get_password_hash(password: str) -> str:
+    pwd_bytes = password.encode('utf-8')
+    salt = bcrypt.gensalt()
+    hashed_password = bcrypt.hashpw(pwd_bytes, salt)
+    return hashed_password.decode('utf-8')
+
+def verify_password(plain_password: str, hashed_password: str) -> bool:
+    password_byte_enc = plain_password.encode('utf-8')
+    hashed_password_byte_enc = hashed_password.encode('utf-8')
+    return bcrypt.checkpw(password_byte_enc, hashed_password_byte_enc)
 
 def generate_hash(data: str) -> tuple[str, str]:
     salt = os.urandom(12)
@@ -18,8 +27,3 @@ def verify_hash(data: str, hash_value: str, salt: str) -> bool:
     gen_hash = hashlib.sha256(salt_bytes + data.encode()).hexdigest()
     return hmac.compare_digest(gen_hash, hash_value)
 
-def get_password_hash(password: str) -> str:
-    return bcrypt_context.hash(password)
-
-def verify_password(plain_password: str, hashed_password: str) -> bool:
-    return bcrypt_context.verify(plain_password, hashed_password)

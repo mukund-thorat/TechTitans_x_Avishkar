@@ -12,6 +12,9 @@ import ExamSection from "@/components/dashboard/ExamSection";
 import InsightsSection from "@/components/dashboard/InsightsSection";
 import EduWalletSection from "@/components/dashboard/EduWalletSection";
 import TasksSection from "@/components/dashboard/TasksSection";
+import OverviewSection from "@/components/dashboard/OverviewSection";
+import ExamDocumentChecklist from "@/components/dashboard/ExamDocumentChecklist";
+import MapSection from "@/components/dashboard/MapSection";
 
 export default function DashboardPage() {
     const { data: user, isLoading } = useCurrentUserQuery();
@@ -33,82 +36,17 @@ export default function DashboardPage() {
                 return <ExamSection />;
             case "insights":
                 return <InsightsSection />;
-            case "edu-wallet":
+            case "study":
                 return <EduWalletSection />;
+
+            case "exam-docs":
+                return <ExamDocumentChecklist />;
             case "tasks":
                 return <TasksSection />;
+            case "map":
+                return <MapSection />;
             default:
-                return (
-                    <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                        <Card className="overflow-hidden border-2 border-primary/10 shadow-lg">
-                            <CardHeader className="bg-primary/5 pb-8">
-                                <div className="flex items-center gap-6">
-                                    <div className="relative">
-                                        {user?.avatar ? (
-                                            <img 
-                                                src={user.avatar} 
-                                                alt="Avatar" 
-                                                className="size-24 rounded-full border-4 border-background shadow-xl"
-                                            />
-                                        ) : (
-                                            <div className="size-24 rounded-full bg-muted flex items-center justify-center border-4 border-background shadow-xl">
-                                                <UserIcon className="size-12 text-muted-foreground" />
-                                            </div>
-                                        )}
-                                        <div className="absolute -bottom-1 -right-1 bg-green-500 size-6 rounded-full border-4 border-background" />
-                                    </div>
-                                    <div>
-                                        <CardTitle className="text-2xl">{user?.firstName} {user?.lastName}</CardTitle>
-                                        <CardDescription className="text-base">{user?.email}</CardDescription>
-                                        <div className="mt-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">
-                                            Adventurer Level 1
-                                        </div>
-                                    </div>
-                                </div>
-                            </CardHeader>
-                            <CardContent className="pt-8">
-                                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                    <div className="p-4 rounded-xl bg-muted/50 border border-border">
-                                        <p className="text-sm font-medium text-muted-foreground">Quests Completed</p>
-                                        <p className="text-2xl font-bold">0</p>
-                                    </div>
-                                    <div className="p-4 rounded-xl bg-muted/50 border border-border">
-                                        <p className="text-sm font-medium text-muted-foreground">Achievement Points</p>
-                                        <p className="text-2xl font-bold">150</p>
-                                    </div>
-                                    <div className="p-4 rounded-xl bg-muted/50 border border-border">
-                                        <p className="text-sm font-medium text-muted-foreground">Account Status</p>
-                                        <p className="text-2xl font-bold text-green-500">Active</p>
-                                    </div>
-                                </div>
-                            </CardContent>
-                        </Card>
-
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <Card className="hover:border-primary/50 transition-colors cursor-pointer group" onClick={() => setActiveSection('tasks')}>
-                                <CardHeader>
-                                    <CardTitle className="text-lg">Daily Challenges</CardTitle>
-                                    <CardDescription>New challenges available every 24 hours.</CardDescription>
-                                </CardHeader>
-                                <CardContent>
-                                    <div className="h-2 w-full bg-muted rounded-full overflow-hidden">
-                                        <div className="h-full bg-primary w-[30%]" />
-                                    </div>
-                                    <p className="text-xs text-muted-foreground mt-2">3 of 10 challenges remaining</p>
-                                </CardContent>
-                            </Card>
-                            <Card className="hover:border-primary/50 transition-colors cursor-pointer group" onClick={() => setActiveSection('exam')}>
-                                <CardHeader>
-                                    <CardTitle className="text-lg">Next Exam</CardTitle>
-                                    <CardDescription>Mathematics Final in 2 days.</CardDescription>
-                                </CardHeader>
-                                <CardContent>
-                                    <Button variant="link" className="px-0 h-auto">Prepare Now &rarr;</Button>
-                                </CardContent>
-                            </Card>
-                        </div>
-                    </div>
-                );
+                return <OverviewSection onNavigate={setActiveSection} />;
         }
     };
 
@@ -120,7 +58,7 @@ export default function DashboardPage() {
                 <div className="p-8 space-y-8 w-full">
                     <header className="flex items-center justify-between w-full">
                         <div>
-                            <h1 className="text-sm font-medium text-muted-foreground capitalize">
+                            <h1 className="text-sm font-medium capitalize">
                                 Dashboard / {activeSection.replace('-', ' ')}
                             </h1>
                         </div>

@@ -8,4 +8,6 @@ export const queryKeys = {
     email: () => ["user", "email"] as const,
     authProvider: () => ["user", "auth-provider"] as const,
   },
+  STATS: "stats",
 } as const;
+
