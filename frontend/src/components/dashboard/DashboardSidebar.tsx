@@ -1,13 +1,14 @@
 import { cn } from "@/lib/utils";
-import { 
-    LayoutDashboard, 
-    FileText, 
-    GraduationCap, 
-    LineChart, 
-    Wallet, 
+import {
+    LayoutDashboard,
+    FileText,
+    GraduationCap,
+    Trophy,
+    Shield,
     CheckSquare,
     Settings,
-    LogOut
+    LogOut,
+    Map as MapIcon
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -21,9 +22,11 @@ export default function DashboardSidebar({ activeSection, setActiveSection }: Si
         { id: 'overview', label: 'Overview', icon: LayoutDashboard },
         { id: 'notes', label: 'Notes', icon: FileText },
         { id: 'exam', label: 'Exam', icon: GraduationCap },
-        { id: 'insights', label: 'Insights', icon: LineChart },
-        { id: 'edu-wallet', label: 'Edu Wallet', icon: Wallet },
+        { id: 'insights', label: 'Leaderboard', icon: Trophy },
+        { id: 'study', label: 'Study', icon: Shield },
         { id: 'tasks', label: 'Tasks', icon: CheckSquare },
+        { id: 'exam-docs', label: 'Exam Documents', icon: FileText },
+        { id: 'map', label: 'Exam Map', icon: MapIcon },
     ];
 
     return (
@@ -33,7 +36,10 @@ export default function DashboardSidebar({ activeSection, setActiveSection }: Si
                     <div className="size-8 bg-primary rounded-lg flex items-center justify-center">
                         <GraduationCap className="size-5 text-primary-foreground" />
                     </div>
-                    <span className="font-bold text-xl tracking-tight">TechTitans</span>
+                    <div className="w-full">
+                        <span className="font-bold text-xl tracking-tight">SAGE</span>
+                        <p className="text-xs text-muted-foreground">Smart Adaptive Guidance Engine</p>
+                    </div>
                 </div>
             </div>
 
@@ -44,8 +50,8 @@ export default function DashboardSidebar({ activeSection, setActiveSection }: Si
                         onClick={() => setActiveSection(item.id)}
                         className={cn(
                             "w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all group",
-                            activeSection === item.id 
-                                ? "bg-primary text-primary-foreground shadow-lg shadow-primary/20" 
+                            activeSection === item.id
+                                ? "bg-primary text-primary-foreground shadow-lg shadow-primary/20"
                                 : "text-muted-foreground hover:bg-muted hover:text-foreground"
                         )}
                     >

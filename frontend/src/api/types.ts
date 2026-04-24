@@ -79,3 +79,12 @@ export interface PaginationParams {
   limit?: number;
   search?: string;
 }
+
+export interface LeaderboardUser {
+  id: string;
+  firstName: string;
+  lastName: string;
+  avatar: string;
+  points: number;
+}
+

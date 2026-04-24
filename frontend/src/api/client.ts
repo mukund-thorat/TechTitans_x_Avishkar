@@ -46,4 +46,6 @@ export const api = {
         request<T>(endpoint, { ...options, method: "PATCH", body: JSON.stringify(body) }),
     delete: <T>(endpoint: string, options?: RequestInit) => 
         request<T>(endpoint, { ...options, method: "DELETE" }),
+    upload: <T>(endpoint: string, formData: FormData, options?: RequestInit) =>
+        request<T>(endpoint, { ...options, method: "POST", body: formData }),
 };
