@@ -26,3 +26,10 @@
   - subtle backgrounds (`bg-muted`)
   - secondary text color (`text-foreground-muted`)
 - Focus on readability over decoration
+
+# Idea and software main sections
+1. Exam Prep System 
+2. Notes System (Notion-like)
+3. Insights & Gamification
+4. Edu Wallet
+5. Task Scheduler & Productivity System
